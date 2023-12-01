@@ -1,1 +1,1 @@
-["Buy Groceries ","Go Shopping","do leetcode","Buy Groceries"]
+["Buy Groceries ","Go Shopping","Do leetcode"]

@@ -3,19 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Todo App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="./style.css">
 </head>
-<body>
-    <h1>Todo App</h1>
-    <form class="myform" action="/addtodo" method="post">
-        <input type="text" name="taskitem" id="taskitem">
-        <button type="submit">Add task</button>
-    </form>
-    <div class="tasklist" id="tasklist">
+<body id="body">
+    <!-- <div class = 'toggle-switch'>
+        <label>
+            <input type = 'checkbox'>
+            <span class = 'slider'></span>
+        </label>
+        <a href = 'https://dribbble.com/shots/14199649-Dark-Light-Mode-Toggle-Switch-Pattern-A11y'>
+            Inspired by the design from Tim Silva
+        </a>
+    </div> -->
+    <label class="switch" id="toggleButton">
+        <input type="checkbox" id="toggleCheckbox">
+        <span class="slider round">Switch Mode</span>
         
-    </div>
+    </label>
+    <h1 id="appTitle">Task Hub </h1>
+    <form class="myform" action="/addtodo" method="post">
+        <input type="text" name="taskitem" id="taskitem" placeholder="Type your Task...">
+        <button type="submit" class="addButton">Add task</button>
+    </form>
+    <div class="tasklist" id="tasklist"></div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./index.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const body = document.getElementById('body');
+            const appTitle = document.getElementById('appTitle');
+            const toggleCheckbox = document.getElementById('toggleCheckbox');
+            const addButton = document.querySelector('.addButton');
+
+            // Toggle between light and dark mode
+            toggleCheckbox.addEventListener('change', function () {
+                body.classList.toggle('dark-mode');
+                appTitle.classList.toggle('dark-mode');
+                addButton.classList.toggle('dark-mode');
+                const currentMode = body.classList.contains('dark-mode') ? 'dark' : 'light';
+                localStorage.setItem('mode', currentMode);
+            });
+
+            // Check user's preference for mode and apply it
+            const savedMode = localStorage.getItem('mode');
+            if (savedMode === 'dark') {
+                body.classList.add('dark-mode');
+                appTitle.classList.add('dark-mode');
+                addButton.classList.add('dark-mode');
+                toggleCheckbox.checked = true;
+            }
+        });
+    </script>
 </body>
 </html>
